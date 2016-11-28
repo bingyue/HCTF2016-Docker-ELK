@@ -2,32 +2,39 @@
 基于docker的elk，曾应用于HCTF2016做日志可视化分析
 
 
-# Elasticsearch(Full text search) + Logstash(Logging) + Kibana(Visualization)
-# Tips:
+ Elasticsearch(Full text search) + Logstash(Logging) + Kibana(Visualization)
+ Tips:
 # Step 1: Build images
-# Change directory where Dockfile exsits and run command:
-# 	docker build --tag="hctf-2016" .
-# After operation ,it built one image named hctf-2016 (You can run command "docker images" to view your local images)
-#
-#
+ Change directory where Dockfile exsits and run command:
+ 	docker build --tag="hctf-2016" .
+ After operation ,it built one image named hctf-2016 (You can run command "docker images" to view your local images)
+
+
 # Step 2:  Start a container with image named hctf-2016, so run command :
-# 	docker run -d -p 80:80 -p 3333:3333 -p 3334:3334 -p 9200:9200 -p 6379:6379 --name Hctf2016_elk -it hctf-2016 /bin/bash
-# Now you started one container named Hctf2016_elk (You can run command "docker ps" to view your containers)
-#
-#
+ 	docker run -d -p 80:80 -p 3333:3333 -p 3334:3334 -p 9200:9200 -p 6379:6379 --name Hctf2016_elk -it hctf-2016 /bin/bash
+ Now you started one container named Hctf2016_elk (You can run command "docker ps" to view your containers)
+
+
 # Step 3: You need run command "docker exec" to spawns a process inside the container called "Hctf2016_elk" 
-# 	docker exec -it Hctf2016_elk /bin/bash
-# 
-#
+ 	docker exec -it Hctf2016_elk /bin/bash
+ 
+
 # Step 4: To run elk when inside:
-#	./start.sh
-# Run restart-logstash.sh to restart logstash if you need
-# 
-# Mention :
-# Send test data:
-# You can send test data (tcp stream) to elk at port 3333,3334  (You can modify port in the file "logstash.conf") 
-# 	echo 'Hello,HCTF2016 ' | nc Server_IP 3333.
-# After this ,you can see the logs in Kibana by view the page http://SERVER_IP/index.html#/dashboard/file/logstash.json
+	./start.sh
+ Run restart-logstash.sh to restart logstash if you need
+ 
+ Mention :
+ Send test data:
+ You can send test data (tcp stream) to elk at port 3333,3334  (You can modify port in the file "logstash.conf") 
+ 	echo 'Hello,HCTF2016 ' | nc Server_IP 3333.
+ After this ,you can see the logs in Kibana by view the page http://SERVER_IP/index.html#/dashboard/file/logstash.json
+
+
+
+
+
+
+
 
 # hub.c.163.com/library/ubuntu:14.04 is also recommeded in China
 FROM ubuntu:14.04
@@ -106,3 +113,4 @@ RUN touch restart-logstash.sh && \
 # Logstash TCP Stream =>  3333,3334
 EXPOSE 80 3333 3334 9200
 
+![images](https://raw.githubusercontent.com/sysorem/HCTF2016-Docker-ELK/master/screenshots/284E792D-545B-4440-9D23-BBC4DF3EBE6B.png)
